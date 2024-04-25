@@ -15,9 +15,18 @@ for [truncate(1)](https://www.man7.org/linux/man-pages/man1/truncate.1.html) `--
 For example
 
 ```shell
-sudo ./twcont.sh 100M
+sudo ./twcont.sh 10M
 ```
 
-will create a container with 100 megabytes of disk.
+will create a container with 10 megabytes of disk.
 
-Container is auto-removed after exit.
+All containers are stored in tmp folder and auto-removed after exit.
+
+## Internals
+
+This script actually consists of four parts:
+
+1. Disk setup using temporary file, temporary dir, `losetup`, `mkfs.ext4`, and `mount`
+2. Busybox setup
+3. `unshare` call and container enter
+4. Cleanup
