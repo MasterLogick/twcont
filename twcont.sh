@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ $(id -u) -ne 0 ]]; then
+    >&2 echo "Run as root"
+    exit 1
+fi
+
 if (( $# != 1 )); then
     >&2 echo "Illegal number of parameters."
     >&2 echo "Usage: $0 [DISK_SIZE]"
